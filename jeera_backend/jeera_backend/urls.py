@@ -15,7 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from jeera_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('create_users/',views.create_users),
+    path('login_users/',views.login_users),
+    path('create_project/',views.create_project),
+    path('update_project/',views.update_project),
+    path('get_projects/',views.get_projects),
+    path('create_story/',views.create_story),
+    path('update_story/',views.update_story),
+    path('get_stories/',views.get_stories),
+    path('create_goal/',views.create_goal),
+    path('update_goal/',views.update_goal),
+    path('get_goals/',views.get_goals),
+
 ]
