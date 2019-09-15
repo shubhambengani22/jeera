@@ -10,12 +10,12 @@
     <div  class="story-list">
       <div *ngIf="stories.length">
           <div class="card" *ngFor="let story of stories">
-              <div class="card-header">{{ story.title }}</div>       
-              <div class="card-body" [ngStyle]="borderLeft(story.type)">
+              <div class="card-header">
+                {{ story.title }}
+                <img src="{{ story.level_icon }}" class="icon">
+              </div>       
+              <div class="card-body" [ngStyle]="borderLeft(story.type)" (click)="goToStory(story.id, story.title, story.desc, story.type, story.level)">
                   <p class="card-text">{{ story.desc }}</p>
-                  <p class="card-text">Story type : {{ story.type | titlecase}}</p>
-                  <p class="card-text">Threat level : {{ story.level }}</p>
-                  <a class="btn btn-warning" (click)="goToStory(story.id, story.title, story.desc, story.type, story.level)">Go to Story</a>
               </div>
           </div>
       </div>

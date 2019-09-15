@@ -28,3 +28,9 @@
     height: 45%;
     background: #ffffff
 }
+
+.icon{
+    float: right;
+    width: 5%;
+    height: 5%;
+}

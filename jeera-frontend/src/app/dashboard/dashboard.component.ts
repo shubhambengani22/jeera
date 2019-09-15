@@ -16,6 +16,13 @@ export class DashboardComponent implements OnInit {
     'bug': '#9B1C31',
     'development': '#006400'
   }
+
+  icons = {
+    'demon': '/assets/images/demon.jpg',
+    'dragon': '/assets/images/dragon.png',
+    'god': '/assets/images/god.png'
+  }
+
   // enhancement_color = '#FFDD05';
   // bug_color = '#9B1C31';
   // dev_color = '#006400';
@@ -26,7 +33,8 @@ export class DashboardComponent implements OnInit {
       title: "Story 1",
       desc: "Description of Story1",
       type: "enhancement",
-      level: 'Demon'
+      level: 'demon',
+      level_icon: this.icons['demon']
 
     },
     {
@@ -34,7 +42,8 @@ export class DashboardComponent implements OnInit {
       title: "Story 2",
       desc: "Description of Story2",
       type: "bug",
-      level: 'Dragon'
+      level: 'dragon',
+      level_icon: this.icons['dragon']
     },
   ];
 
