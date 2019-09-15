@@ -1,0 +1,50 @@
+
+<div class="row">
+  <div class="column column0 col-2">
+      <app-navbar>
+
+      </app-navbar>
+  </div>
+  <div class="column column1 col-5">
+    <h2>Stories</h2><br>
+    <div  class="story-list">
+      <div *ngIf="stories.length">
+          <div class="card" *ngFor="let story of stories">
+              <div class="card-header">
+                {{ story.title }}
+                <img src="{{ story.level_icon }}" class="icon">
+              </div>       
+              <div class="card-body" [ngStyle]="borderLeft(story.type)" (click)="goToStory(story.id, story.title, story.desc, story.type, story.level)">
+                  <p class="card-text">{{ story.desc }}</p>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="column column2 col-5">
+      <h2>Progress</h2><br>
+    <div class="row progress">
+      <div class="column">
+          <h5>Weekly Progress</h5>
+          <p><fusioncharts
+            width="600"
+            height="250"
+            type="pie2d"
+            [dataSource]=dataSource >
+        </fusioncharts></p>
+      </div>
+    </div>
+    <div class="row progress">
+      <div class="column"><br><br>
+          <h5>Overall Progress</h5>
+          <p><fusioncharts
+            [width]="width"
+            [height]="height"
+            [type]="type"
+            [dataFormat]="dataFormat"
+            [dataSource]="dataSource">
+          </fusioncharts></p>
+      </div>
+    </div>
+  </div>
+</div>
