@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+@import '../node_modules/bootstrap/dist/css/bootstrap.css';
+
+.column {
+    float: left;
+    width: 50%;
+    padding: 1%;
+  }
+
+.column1{
+    border-right: 2px solid rgb(241, 236, 236);
+}
+  
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.row{
+    margin-left: 0.3%;
+    margin-right: 0.3%;
+    height: 100%;
+}
+
+.progress{
+    height: 45%;
+    background: #ffffff
+}
