@@ -8,6 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { StoryDetailComponent } from './story-detail/story-detail.component';
 
 import { FusionChartsModule } from 'angular-fusioncharts';
+import { FormsModule } from '@angular/forms';
 
 // Load FusionCharts
 import * as FusionCharts from 'fusioncharts';
@@ -15,6 +16,7 @@ import * as FusionCharts from 'fusioncharts';
 import * as Charts from 'fusioncharts/fusioncharts.charts';
 // Load fusion theme
 import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
+import { StoriesComponent } from './stories/stories.component';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme)
@@ -24,12 +26,14 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme)
     AppComponent,
     DashboardComponent,
     NavbarComponent,
-    StoryDetailComponent
+    StoryDetailComponent,
+    StoriesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FusionChartsModule
+    FusionChartsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
