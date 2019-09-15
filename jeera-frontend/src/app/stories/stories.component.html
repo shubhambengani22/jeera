@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="column column0 col-2">
+        <app-navbar>
+    
+        </app-navbar>
+    </div>
+    <div class="column column1 col-10">
+        <h2 class="col-8">All Stories</h2>
+        <input class="form-control col-2 search" placeholder="Search" (keyup.enter)="searchStory(story.value)" #story><br>
+        <div  class="story-list">
+        <div *ngIf="stories.length">
+            <div class="card" *ngFor="let story of stories">
+                <div class="card-header">
+                    {{ story.title }}
+                    <img src="{{ story.level_icon }}" class="icon">
+                </div>       
+                <div class="card-body" [ngStyle]="borderLeft(story.type)" (click)="goToStory(story.id, story.title, story.desc, story.type, story.level)">
+                    <p class="card-text">{{ story.desc }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
