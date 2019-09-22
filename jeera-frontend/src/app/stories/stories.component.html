@@ -8,7 +8,7 @@
         <h2 class="col-8">All Stories</h2>
         <input class="form-control col-2 search" placeholder="Search" (keyup.enter)="searchStory(story.value)" #story><br>
         <div  class="story-list">
-        <div *ngIf="stories.length">
+        <div *ngIf="this.stories.length">
             <div class="card" *ngFor="let story of stories">
                 <div class="card-header">
                     {{ story.title }}

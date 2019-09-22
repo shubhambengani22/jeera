@@ -2,55 +2,32 @@ import { Component, OnInit } from '@angular/core';
 import { SessionStorageService } from 'angular-web-storage';
 import { Story } from '../stories';
 import { Router } from '@angular/router';
+import { all_stories } from '../dummy_stories';
 
 @Component({
   selector: 'app-stories',
   templateUrl: './stories.component.html',
   styleUrls: ['./stories.component.css']
 })
+
 export class StoriesComponent implements OnInit {
+
+  stories = all_stories;
+  
   ngOnInit(): void {
+    console.log(this.stories);
   }
 
-  story_display: Story[];
+  
 
   colors = {
     'enhancement': '#FFDD05',
     'bug': '#9B1C31',
     'development': '#006400'
   }
-
-  icons = {
-    'demon': '/assets/images/demon.jpg',
-    'dragon': '/assets/images/dragon.png',
-    'god': '/assets/images/god.png'
-  }
-
   // enhancement_color = '#FFDD05';
   // bug_color = '#9B1C31';
   // dev_color = '#006400';
-
-  stories_copy: Story[];
-
-  stories: Story[] = [
-    {
-      id: 1,
-      title: "Story 1",
-      desc: "Description of Story1",
-      type: "enhancement",
-      level: 'demon',
-      level_icon: this.icons['demon']
-
-    },
-    {
-      id: 2,
-      title: "Story 2",
-      desc: "Description of Story2",
-      type: "bug",
-      level: 'dragon',
-      level_icon: this.icons['dragon']
-    },
-  ];
 
   borderLeft(color){
     return {
@@ -68,6 +45,7 @@ export class StoriesComponent implements OnInit {
     this.storage.set('story_desc', story_desc);
     this.storage.set('story_type', story_type);
     this.storage.set('story_level', story_level);
+    //console.log(story_id);
     this.router.navigate(['/story']);
   }
 
