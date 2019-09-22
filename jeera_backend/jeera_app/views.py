@@ -120,9 +120,7 @@ def update_story(request):
 def get_stories(request):
     story_list = []
     for s in Story.objects.all():
-        project = json.loads(Project.objects.filter(project_id=s.story_project))
-        print(s.story_project)
-        story_list.append({'s_id':s.story_id,'s_name':s.story_name,'s_type':s.story_type,'s_level':s.story_level,'s.description':s.story_description,'project':project,'s.weightage':s.story_weightage,'s_comment':s.story_comment,'s.action':s.story_action})
+        story_list.append({'s_id':s.story_id,'s_name':s.story_name,'s_type':s.story_type,'s_level':s.story_level,'s.description':s.story_description,'project':s.story_project_id,'s.weightage':s.story_weightage,'s_comment':s.story_comment,'s.action':s.story_action})
     return JsonResponse(story_list,safe=False)
 
 @csrf_exempt
@@ -164,7 +162,7 @@ def update_goal(request):
 def get_goals(request):
     goals_list = []
     for g in goals.objects.all():
-        goals_list.append({'g_id':g.goal_id,'g_name':g.goal_name,'g_period':g.goal_period,'g_story':g.goal_story,'g_progress':g.goal_progress,'g_weightage':g.goal_weightage})
+        goals_list.append({'g_id':g.goal_id,'g_name':g.goal_name,'g_period':g.goal_period,'g_story':g.goal_story_id,'g_progress':g.goal_progress,'g_weightage':g.goal_weightage})
     return JsonResponse(goals_list,safe=False)
 
 """
