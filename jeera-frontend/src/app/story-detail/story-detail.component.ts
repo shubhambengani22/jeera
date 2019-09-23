@@ -26,6 +26,7 @@ export class StoryDetailComponent implements OnInit {
   public isCollapsed = false;
   stories = all_stories;
   goals: Goals[] = []
+  goal_story: string;
 
   ngOnInit() {
     this.story_id = this.storage.get("story_id");
@@ -33,6 +34,7 @@ export class StoryDetailComponent implements OnInit {
     this.story_desc = this.storage.get("story_desc");
     this.story_type = this.storage.get("story_type");
     this.story_level = this.storage.get("story_level");
+    this.goal_story = this.story_id+" - "+this.story_title
     //console.log(this.story_id, this.story_title, this.story_type.toLowerCase(), this.story_level.toLowerCase());
     this.setSelectedType(document.getElementById('story-type'), this.story_type.toLowerCase());
     this.setSelectedLevel(document.getElementById('story-level'), this.story_level.toLowerCase());

@@ -46,11 +46,13 @@
         <button class="btn btn-info add-goal" (click)="addNewGoal(id.value, title.value)">Add Goal</button><br>
         <div class="row">
             <div class="column col-12">
-                <div class="card" *ngFor="let goal of this.goals">
-                    <div class="card-header">{{ goal.title }}</div>
-                    <div class="card-body">
-                        <div class="card-text">
-                            {{ goal.desc }}
+                <div *ngFor="let goal of this.goals">
+                    <div class="card" *ngIf="goal.story==this.goal_story">
+                        <div class="card-header">{{ goal.title }}</div>
+                        <div class="card-body">
+                            <div class="card-text">
+                                {{ goal.desc }}
+                            </div>
                         </div>
                     </div>
                 </div>

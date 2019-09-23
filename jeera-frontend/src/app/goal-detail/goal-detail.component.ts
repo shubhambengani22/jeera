@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionStorageService } from 'angular-web-storage';
 import { all_stories } from '../dummy_stories';
+import { Goals } from '../goals';
 
 @Component({
   selector: 'app-goal-detail',
@@ -19,8 +20,8 @@ export class GoalDetailComponent implements OnInit {
   story_id: number;
   story_title: string;
   stories = all_stories;
-  goalArray = [];
-  goal = {};
+  goalArray: Goals[] = [];
+  goal: Goals;
 
   constructor(private router: Router, private storage: SessionStorageService) { }
 
@@ -33,7 +34,10 @@ export class GoalDetailComponent implements OnInit {
     this.goal_progress = this.storage.get("goal_progress");
     this.story_id = this.storage.get("story_id");
     this.story_title = this.storage.get("story_title");
-    this.goalArray = this.storage.get("goalArray");
+    if(this.storage.get("goalArray") != null){
+      this.goalArray = this.storage.get("goalArray");
+    }
+    //console.log(this.goalArray)
   }
 
   addToGoals(goal_id, goal_title, goal_desc, goal_story, goal_weightage, goal_progress){
@@ -45,8 +49,10 @@ export class GoalDetailComponent implements OnInit {
       weightage: goal_weightage,
       progress: goal_progress
     }
-
+    console.log(this.goalArray)
     this.goalArray.push(this.goal);
+    console.log(this.goalArray)
+    //alert("Goal added : "+this.goal)
   }
 
   goBack(goalsArray){
