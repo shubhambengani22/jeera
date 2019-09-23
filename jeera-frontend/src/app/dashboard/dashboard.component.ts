@@ -3,6 +3,7 @@ import { Story } from '../stories';
 import { Router } from '@angular/router';
 import { SessionStorageService } from 'angular-web-storage';
 import * as FusionCharts from 'fusioncharts';
+import { all_stories } from '../dummy_stories';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,6 +11,8 @@ import * as FusionCharts from 'fusioncharts';
   styleUrls: ['./dashboard.component.css',],
 })
 export class DashboardComponent implements OnInit {
+
+  stories = all_stories;
 
   colors = {
     'enhancement': '#FFDD05',
@@ -26,26 +29,6 @@ export class DashboardComponent implements OnInit {
   // enhancement_color = '#FFDD05';
   // bug_color = '#9B1C31';
   // dev_color = '#006400';
-
-  stories: Story[] = [
-    {
-      id: 1,
-      title: "Story 1",
-      desc: "Description of Story1",
-      type: "enhancement",
-      level: 'demon',
-      level_icon: this.icons['demon']
-
-    },
-    {
-      id: 2,
-      title: "Story 2",
-      desc: "Description of Story2",
-      type: "bug",
-      level: 'dragon',
-      level_icon: this.icons['dragon']
-    },
-  ];
 
   borderLeft(color){
     return {

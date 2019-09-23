@@ -2,27 +2,27 @@
     <div class="column col-2">
         <app-navbar></app-navbar>
     </div>
-    <div class="column col-10">
+    <div class="column column3 col-6">
         <h2>Story Details</h2><br><br>
         <form>
             <div class="row">
-                <div class="form-group col-3">
+                <div class="form-group col-6">
                     <label for="story-id">Story ID</label>
-                    <input type="text" class="form-control col-3" id="story-id" value="{{ this.story_id }}" disabled>
+                    <input type="text" #id class="form-control col-3" id="story-id" value="{{ this.story_id }}" disabled>
                 </div>
-                <div class="form-group col-3">
+                <div class="form-group col-6">
                     <label for="story-title">Story Title</label>
-                    <input type="text" class="form-control col-12" id="story-title" value="{{ this.story_title }}">
+                    <input type="text" #title class="form-control col-12" id="story-title" value="{{ this.story_title }}">
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-12">
                     <label for="story-desc">Story Description</label>
-                    <textarea class="form-control col-6" id="story-desc" style="height: 100px" value="{{ this.story_desc }}"></textarea>
+                    <textarea class="form-control col-12" id="story-desc" style="height: 100px" value="{{ this.story_desc }}"></textarea>
                 </div>
             </div>
                 <div class="row">
-                    <div class="form-group col-3">
+                    <div class="form-group col-6">
                         <label for="story-type">Story Type</label>
                         <select name="type" class="form-control" id="story-type">
                             <option>Enhancement</option>
@@ -30,7 +30,7 @@
                             <option>Development</option>
                         </select>
                     </div>
-                    <div class="form-group col-3">
+                    <div class="form-group col-6">
                         <label for="story-level">Story Level</label>
                         <select name="level" class="form-control" id="story-level">
                             <option>Demon</option>
@@ -40,5 +40,23 @@
                     </div>
                 </div>
         </form>
+    </div>
+    <div class="column column4 col-4">
+        <h2>All Goals</h2>
+        <button class="btn btn-info add-goal" (click)="addNewGoal(id.value, title.value)">Add Goal</button><br>
+        <div class="row">
+            <div class="column col-12">
+                <div *ngFor="let goal of this.goals">
+                    <div class="card" *ngIf="goal.story==this.goal_story">
+                        <div class="card-header">{{ goal.title }}</div>
+                        <div class="card-body">
+                            <div class="card-text">
+                                {{ goal.desc }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

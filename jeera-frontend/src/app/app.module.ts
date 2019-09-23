@@ -17,6 +17,10 @@ import * as Charts from 'fusioncharts/fusioncharts.charts';
 // Load fusion theme
 import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 import { StoriesComponent } from './stories/stories.component';
+import { ProjectsComponent } from './projects/projects.component';
+import { ProjectDetailComponent } from './project-detail/project-detail.component';
+import { MatButtonModule, MatButtonToggleModule, MatIconModule } from '@angular/material';
+import { GoalDetailComponent } from './goal-detail/goal-detail.component'
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme)
@@ -27,13 +31,19 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme)
     DashboardComponent,
     NavbarComponent,
     StoryDetailComponent,
-    StoriesComponent
+    StoriesComponent,
+    ProjectsComponent,
+    ProjectDetailComponent,
+    GoalDetailComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FusionChartsModule,
-    FormsModule
+    FormsModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -34,3 +34,17 @@
     width: 5%;
     height: 5%;
 }
+
+.column4{
+    border-left: 2px solid rgb(241, 236, 236);
+}
+
+.add-goal{
+    float: right;
+    margin-top: -9%;
+}
+
+.add-story{
+    float: right;
+    margin-top: -7%;
+}
