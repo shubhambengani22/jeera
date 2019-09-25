@@ -3,6 +3,7 @@ import { SessionStorageService } from 'angular-web-storage';
 import { Story } from '../stories';
 import { Router } from '@angular/router';
 import { all_stories } from '../dummy_stories';
+import { JeeraDataService } from '../jeera-data.service';
 
 @Component({
   selector: 'app-stories',
@@ -15,7 +16,7 @@ export class StoriesComponent implements OnInit {
   stories = all_stories;
   
   ngOnInit(): void {
-    console.log(this.stories);
+    this.stories = this.jeera.getStories();
   }
 
   
@@ -37,7 +38,7 @@ export class StoriesComponent implements OnInit {
     }
   } 
 
-  constructor(private router: Router, private storage: SessionStorageService) { }
+  constructor(private router: Router, private storage: SessionStorageService, private jeera: JeeraDataService) { }
 
   goToStory(story_id, story_title, story_desc, story_type, story_level){
     this.storage.set('story_id', story_id);

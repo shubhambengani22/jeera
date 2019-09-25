@@ -120,7 +120,7 @@ def update_story(request):
 def get_stories(request):
     story_list = []
     for s in Story.objects.all():
-        story_list.append({'s_id':s.story_id,'s_name':s.story_name,'s_type':s.story_type,'s_level':s.story_level,'s.description':s.story_description,'project':s.story_project_id,'s.weightage':s.story_weightage,'s_comment':s.story_comment,'s.action':s.story_action})
+        story_list.append({'s_id':s.story_id,'s_name':s.story_name,'s_type':s.story_type,'s_level':s.story_level,'s_description':s.story_description,'s_project':s.story_project_id,'s_weightage':s.story_weightage,'s_comment':s.story_comment,'s_action':s.story_action})
     return JsonResponse(story_list,safe=False)
 
 @csrf_exempt

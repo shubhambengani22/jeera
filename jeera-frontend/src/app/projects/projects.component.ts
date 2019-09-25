@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Project } from '../projects';
 import { Router } from '@angular/router';
 import { SessionStorageService } from 'angular-web-storage';
+import { JeeraDataService } from '../jeera-data.service';
 
 @Component({
   selector: 'app-projects',
@@ -10,22 +11,12 @@ import { SessionStorageService } from 'angular-web-storage';
 })
 export class ProjectsComponent implements OnInit {
 
-  projects: Project[] = [
-    {
-      id: 1,
-      name: 'Project1',
-      git: 'https://jeera/project1.git'
-    },
-    {
-      id: 2,
-      name: 'Project2',
-      git: 'https://jeera/project2.git'
-    },
-  ];
+  projects: Project[]=[];
 
-  constructor(private router: Router, private storage: SessionStorageService) { }
+  constructor(private router: Router, private storage: SessionStorageService, private jeera: JeeraDataService) { }
 
   ngOnInit() {
+    this.projects = this.jeera.getProjects();
   }
 
   searchProject(project){
