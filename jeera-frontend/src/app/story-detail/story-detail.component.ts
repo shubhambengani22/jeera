@@ -27,6 +27,7 @@ export class StoryDetailComponent implements OnInit {
   stories = all_stories;
   goals: Goals[] = []
   goal_story: string;
+  state: string
 
   ngOnInit() {
     this.story_id = this.storage.get("story_id");
@@ -39,6 +40,7 @@ export class StoryDetailComponent implements OnInit {
     this.setSelectedType(document.getElementById('story-type'), this.story_type.toLowerCase());
     this.setSelectedLevel(document.getElementById('story-level'), this.story_level.toLowerCase());
     this.goals = this.storage.get("goalArray");
+    this.state = this.storage.get("state")
     console.log(this.goals);
   }
 

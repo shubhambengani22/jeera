@@ -45,6 +45,7 @@ export class StoriesComponent implements OnInit {
     this.storage.set('story_desc', story_desc);
     this.storage.set('story_type', story_type);
     this.storage.set('story_level', story_level);
+    this.storage.set("state", "update")
     //console.log(story_id);
     this.router.navigate(['/story']);
   }

@@ -39,6 +39,14 @@
                         </select>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="column col-2">
+                        <button class="btn btn-primary btn-lg" (click)="addToGoals(g_id.value, g_title.value, desc.value, story_details.value, weightage.value, progress.value)">Save</button>
+                    </div>
+                    <div class="column col-2">
+                        <button class="btn btn-primary btn-lg" (click)="goBack(this.goalArray)">Back</button>
+                    </div>
+                </div>
         </form>
     </div>
     <div class="column column4 col-4">
