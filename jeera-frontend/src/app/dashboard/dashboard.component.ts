@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { SessionStorageService } from 'angular-web-storage';
 import * as FusionCharts from 'fusioncharts';
 import { all_stories } from '../dummy_stories';
+import { JeeraDataService } from '../jeera-data.service';
+import { all_icons } from '../icons';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +14,8 @@ import { all_stories } from '../dummy_stories';
 })
 export class DashboardComponent implements OnInit {
 
-  stories = all_stories;
+  // stories = all_stories;
+  stories: Story[] =[];
 
   colors = {
     'enhancement': '#FFDD05',
@@ -129,20 +132,19 @@ line_data = {
       label: "2016",
       value: "91.8"
     }
-  ]
-};
-
+  ]};
   width = 600;
   height = 200;
   type = "line";
   dataFormat = "json";
   line_dataSource = this.line_data;
 
-  constructor(private router: Router, private storage: SessionStorageService) {
-    
+  constructor(private router: Router, private storage: SessionStorageService, private jeera: JeeraDataService) {
+    this.stories = this.jeera.getStories();
    }
 
   ngOnInit() {
+    
   }
 
   goToStory(story_id, story_title, story_desc, story_type, story_level){

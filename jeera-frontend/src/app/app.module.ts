@@ -21,6 +21,7 @@ import { ProjectsComponent } from './projects/projects.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { MatButtonModule, MatButtonToggleModule, MatIconModule } from '@angular/material';
 import { GoalDetailComponent } from './goal-detail/goal-detail.component'
+import { HttpClientModule } from '@angular/common/http';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme)
@@ -41,6 +42,7 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme)
     AppRoutingModule,
     FusionChartsModule,
     FormsModule,
+    HttpClientModule,
     MatButtonModule,
     MatButtonToggleModule,
     MatIconModule
