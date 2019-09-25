@@ -8,23 +8,23 @@
             <div class="row">
                 <div class="form-group col-6">
                     <label for="story-id">Story ID</label>
-                    <input type="text" #id class="form-control col-3" id="story-id" value="{{ this.story_id }}" disabled>
+                    <input type="text" #s_id class="form-control col-3" id="story-id" value="{{ this.story_id }}" disabled>
                 </div>
                 <div class="form-group col-6">
                     <label for="story-title">Story Title</label>
-                    <input type="text" #title class="form-control col-12" id="story-title" value="{{ this.story_title }}">
+                    <input type="text" #s_title class="form-control col-12" id="story-title" value="{{ this.story_title }}">
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-12">
                     <label for="story-desc">Story Description</label>
-                    <textarea class="form-control col-12" id="story-desc" style="height: 100px" value="{{ this.story_desc }}"></textarea>
+                    <textarea class="form-control col-12" id="story-desc" #s_desc style="height: 100px" value="{{ this.story_desc }}"></textarea>
                 </div>
             </div>
                 <div class="row">
                     <div class="form-group col-6">
                         <label for="story-type">Story Type</label>
-                        <select name="type" class="form-control" id="story-type">
+                        <select name="type" #s_type class="form-control" id="story-type">
                             <option>Enhancement</option>
                             <option>Bug</option>
                             <option>Development</option>
@@ -32,7 +32,7 @@
                     </div>
                     <div class="form-group col-6">
                         <label for="story-level">Story Level</label>
-                        <select name="level" class="form-control" id="story-level">
+                        <select name="level" #s_level class="form-control" id="story-level">
                             <option>Demon</option>
                             <option>Dragon</option>
                             <option>God</option>
@@ -41,10 +41,10 @@
                 </div>
                 <div class="row">
                     <div class="column col-2">
-                        <button class="btn btn-primary btn-lg" (click)="addToGoals(g_id.value, g_title.value, desc.value, story_details.value, weightage.value, progress.value)">Save</button>
+                        <button class="btn btn-primary btn-lg" (click)="addToStory(s_id.value, s_title.value, s_desc.value, s_type.value, s_level.value)">Save</button>
                     </div>
                     <div class="column col-2">
-                        <button class="btn btn-primary btn-lg" (click)="goBack(this.goalArray)">Back</button>
+                        <button class="btn btn-primary btn-lg" (click)="goBack(this.storyArray)">Back</button>
                     </div>
                 </div>
         </form>

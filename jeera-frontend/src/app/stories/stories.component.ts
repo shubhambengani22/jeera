@@ -14,9 +14,12 @@ import { JeeraDataService } from '../jeera-data.service';
 export class StoriesComponent implements OnInit {
 
   stories = all_stories;
+  storyArray: Story[] = []
   
   ngOnInit(): void {
     this.stories = this.jeera.getStories();
+    this.storyArray = this.storage.get("storyArray")
+    console.log(this.storyArray)
   }
 
   

@@ -6,6 +6,7 @@ import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import { all_stories } from '../dummy_stories';
 import { Goals } from '../goals';
+import { Story } from '../stories'
 
 @Component({
   selector: 'app-story-detail',
@@ -15,6 +16,7 @@ import { Goals } from '../goals';
 export class StoryDetailComponent implements OnInit {
 
   goalArray = [];
+  //storyArray = []
 
   constructor(private storage: SessionStorageService, @Inject(DOCUMENT) document, private router: Router) { }
 
@@ -28,6 +30,8 @@ export class StoryDetailComponent implements OnInit {
   goals: Goals[] = []
   goal_story: string;
   state: string
+  story: Story
+  storyArray: Story[] = []
 
   ngOnInit() {
     this.story_id = this.storage.get("story_id");
@@ -75,6 +79,26 @@ export class StoryDetailComponent implements OnInit {
     this.storage.set('story_title', story_title);
     this.storage.set('goalArray', this.goals);
     this.router.navigate(['/goal']);
+  }
+
+  addToStory(s_id, s_title, s_desc, s_type, s_level){
+    this.story = {
+      id: s_id,
+      title: s_title,
+      desc: s_desc,
+      type: s_type,
+      level: s_level,
+      level_icon: s_level.toLowerCase()
+    }
+    //console.log(this.storyArray)
+    this.storyArray.push(this.story);
+    console.log(this.storyArray)
+    //alert("Goal added : "+this.goal)
+  }
+
+  goBack(storyArray){
+    this.storage.set("storyArray", storyArray);
+    this.router.navigate(["/all_stories"])
   }
 
 }

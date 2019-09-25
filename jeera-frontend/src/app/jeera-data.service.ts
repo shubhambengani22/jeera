@@ -11,7 +11,7 @@ import { Project } from './projects';
 })
 export class JeeraDataService {
 
-  host:string = 'http://127.0.0.1:8000';
+  host:string = 'http://192.168.0.105:8000';
 
   constructor(private http: HttpClient) { }
 
