@@ -10,7 +10,8 @@ import { GoalDetailComponent } from './goal-detail/goal-detail.component';
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent
+    redirectTo: '/dashboard',
+    pathMatch: 'full'
   },
   {
     path: 'dashboard',

@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import '../node_modules/bootstrap/dist/css/bootstrap.css';
+@import '../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 .column {
     float: left;
@@ -39,12 +40,25 @@
     border-left: 2px solid rgb(241, 236, 236);
 }
 
+.column5{
+    border-left: 2px solid rgb(241, 236, 236);
+}
+
 .add-goal{
     float: right;
     margin-top: -9%;
 }
 
 .add-story{
+    position: relative;
     float: right;
-    margin-top: -7%;
+    margin-top: -3%;
+    margin-right: 20%;
+}
+
+.add-project{
+    position: relative;
+    float: right;
+    margin-top: -3.4%;
+    margin-right: 20%;
 }

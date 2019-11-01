@@ -23,6 +23,14 @@ export class ProjectsComponent implements OnInit {
     console.log(project)
   }
 
+  addProject(project_id, project_title, project_git){
+    this.storage.set("project_id", project_id);
+    this.storage.set("project_title", project_title);
+    this.storage.set("project_git", project_git);
+    console.log("Project ID : ", project_id)
+    this.router.navigate(['/project']);
+  }
+
   goToProject(project_id, project_title, project_git){
     this.storage.set('project_id', project_id);
     this.storage.set('project_title', project_title);

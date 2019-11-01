@@ -11,7 +11,7 @@ import { Project } from './projects';
 })
 export class JeeraDataService {
 
-  host:string = 'http://192.168.0.105:8000';
+  host:string = 'http://localhost:8000';
 
   constructor(private http: HttpClient) { }
 
@@ -44,8 +44,10 @@ export class JeeraDataService {
     return projects;
   }
 
-  createStory(storyData){
-    return this.http.post<any>(this.host+"/create_story/",storyData,{'responseType':'json'});
+  createStory(storyData): Observable<any>{
+    console.log(storyData);
+    
+    return this.http.post(this.host+"/create_story/",storyData,{'responseType':'json'});
   }
 
   updateStory(storyData){
@@ -56,9 +58,7 @@ export class JeeraDataService {
     var stories: Story[] = [];
     this.http.get<any>(this.host+"/get_stories/",{'responseType':'json'}).subscribe(data => {
       data.forEach(element => {
-        console.log(element);
-        var story =  new Story(element.s_id,element.s_name,element.s_description,element.s_type, element.s_level,all_icons[element.s_level.toLowerCase()]);
-        console.log(story);
+        var story =  new Story(element.s_id,element.s_name,element.s_description,element.s_type, element.s_level,all_icons[element.s_level.toLowerCase()], element.s_project);
         stories.push(story);
       });
     });

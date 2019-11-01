@@ -141,6 +141,7 @@ line_data = {
 
   constructor(private router: Router, private storage: SessionStorageService, private jeera: JeeraDataService) {
     this.stories = this.jeera.getStories();
+    //console.log(this.stories)
    }
 
   ngOnInit() {

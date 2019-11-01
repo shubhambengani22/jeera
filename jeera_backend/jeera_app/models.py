@@ -23,8 +23,8 @@ class Goal(models.Model):
     goal_name = models.CharField(max_length=255)
     goal_period = models.CharField(max_length=255)
     goal_story = models.ForeignKey(Story,default='',on_delete=models.CASCADE)
-    goal_progress = models.IntegerField(default=0)
     goal_weightage = models.IntegerField(default=7)
+    goal_desc = models.CharField(max_length=255, default="")
 
 class User(models.Model):
     user_name = models.CharField(unique=True,max_length=255)

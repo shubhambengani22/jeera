@@ -13,16 +13,14 @@ import { JeeraDataService } from '../jeera-data.service';
 
 export class StoriesComponent implements OnInit {
 
-  stories = all_stories;
+  stories: Story[];
   storyArray: Story[] = []
   
   ngOnInit(): void {
     this.stories = this.jeera.getStories();
     this.storyArray = this.storage.get("storyArray")
-    console.log(this.storyArray)
+    console.log(this.stories)
   }
-
-  
 
   colors = {
     'enhancement': '#FFDD05',
@@ -43,19 +41,19 @@ export class StoriesComponent implements OnInit {
 
   constructor(private router: Router, private storage: SessionStorageService, private jeera: JeeraDataService) { }
 
-  goToStory(story_id, story_title, story_desc, story_type, story_level){
+  searchStory(story){
+    console.log(story)
+  }
+
+  goToStory(story_id, story_title, story_desc, story_type, story_level, project_id){
     this.storage.set('story_id', story_id);
     this.storage.set('story_title', story_title);
     this.storage.set('story_desc', story_desc);
     this.storage.set('story_type', story_type);
     this.storage.set('story_level', story_level);
-    this.storage.set("state", "update")
+    this.storage.set('project_id', project_id);
     //console.log(story_id);
     this.router.navigate(['/story']);
-  }
-
-  searchStory(story){
-    console.log(story)
   }
 
 }

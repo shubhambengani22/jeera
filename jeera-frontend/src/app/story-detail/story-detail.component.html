@@ -6,9 +6,13 @@
         <h2>Story Details</h2><br><br>
         <form>
             <div class="row">
-                <div class="form-group col-6">
+                <div class="form-group col-4">
                     <label for="story-id">Story ID</label>
-                    <input type="text" #s_id class="form-control col-3" id="story-id" value="{{ this.story_id }}" disabled>
+                    <input type="text" #s_id class="form-control col-6" id="story-id" value="{{ this.story_id }}">
+                </div>
+                <div class="form-group col-6">
+                    <label for="project-id">Project</label>
+                    <input type="text" #project class="form-control col-6" id="project-id" value="{{ this.project_id }}" disabled>
                 </div>
                 <div class="form-group col-6">
                     <label for="story-title">Story Title</label>
@@ -40,8 +44,19 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="form-group col-3">
+                        <label for="story-weightage">Story Weightage</label>
+                        <input type="number" #weightage min="1" max="100" class="form-control col-8" id="story-weightage" value="{{ this.story_weightage }}">
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="story-progress">Story Progress</label>
+                        <progress-bar id="progress" [progress]="progress">
+                        </progress-bar>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="column col-2">
-                        <button class="btn btn-primary btn-lg" (click)="addToStory(s_id.value, s_title.value, s_desc.value, s_type.value, s_level.value)">Save</button>
+                        <button class="btn btn-primary btn-lg" (click)="addToStory(s_id.value, s_title.value, s_desc.value, s_type.value, s_level.value, this.project_id)">Save</button>
                     </div>
                     <div class="column col-2">
                         <button class="btn btn-primary btn-lg" (click)="goBack(this.storyArray)">Back</button>
@@ -51,15 +66,16 @@
     </div>
     <div class="column column4 col-4">
         <h2>All Goals</h2>
-        <button class="btn btn-info add-goal" (click)="addNewGoal(id.value, title.value)">Add Goal</button><br>
-        <div class="row">
+        <button class="btn btn-info add-goal" (click)="addNewGoal(s_id.value, s_title.value)">Add Goal</button><br>
+        <div *ngIf="!loadGoal"><h4>No Goals</h4></div>
+        <div class="row" *ngIf="loadGoal">
             <div class="column col-12">
-                <div *ngFor="let goal of this.goals">
-                    <div class="card" *ngIf="goal.story==this.goal_story">
-                        <div class="card-header">{{ goal.title }}</div>
+                <div *ngFor="let goal of this.goalArray">
+                    <div class="card" *ngIf="goal.g_story==this.story_id" (click)="goToGoal(goal.g_id, goal.g_name, goal.goal_desc, goal.g_story, goal.g_weightage, goal.g_progress)">
+                        <div class="card-header">{{ goal.g_name }}</div>
                         <div class="card-body">
                             <div class="card-text">
-                                {{ goal.desc }}
+                                {{ goal.goal_desc }}
                             </div>
                         </div>
                     </div>

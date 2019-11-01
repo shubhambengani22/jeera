@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { SessionStorageService } from 'angular-web-storage';
 import { all_stories } from '../dummy_stories';
 import { Goals } from '../goals';
+import { JeeraDataService } from '../jeera-data.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-goal-detail',
@@ -22,8 +24,9 @@ export class GoalDetailComponent implements OnInit {
   stories = all_stories;
   goalArray: Goals[] = [];
   goal: Goals;
+  progress: number
 
-  constructor(private router: Router, private storage: SessionStorageService) { }
+  constructor(private snackBar: MatSnackBar, private router: Router, private storage: SessionStorageService, public jeeradataservice: JeeraDataService) { }
 
   ngOnInit() {
     this.goal_id = this.storage.get("id");
@@ -37,22 +40,36 @@ export class GoalDetailComponent implements OnInit {
     if(this.storage.get("goalArray") != null){
       this.goalArray = this.storage.get("goalArray");
     }
+    this.progress = 0;
     //console.log(this.goalArray)
   }
 
   addToGoals(goal_id, goal_title, goal_desc, goal_story, goal_weightage, goal_progress){
     this.goal = {
-      id: goal_id,
+      g_id: goal_id,
+      s_id: this.story_id,
       title: goal_title,
       desc: goal_desc,
       story: goal_story,
       weightage: goal_weightage,
       progress: goal_progress
     }
-    console.log(this.goalArray)
-    this.goalArray.push(this.goal);
-    console.log(this.goalArray)
-    //alert("Goal added : "+this.goal)
+    // console.log(this.goalArray)
+    // this.goalArray.push(this.goal);
+    // console.log(this.goalArray)
+    this.jeeradataservice.createGoal(this.goal).subscribe((res)=>{
+      console.log(res)
+      this.openSnackBar(res.status)
+    },
+    (error)=>{
+      console.log(error)
+    })
+  }
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message, "Dismiss", {
+      duration: 2000,
+    });
   }
 
   goBack(goalsArray){

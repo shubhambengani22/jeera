@@ -22,12 +22,20 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-6">
-                    <label for="goal-story">Goal Story</label>
-                    <input type="text" #story_details class="form-control col-12" id="goal-title" value="{{ this.story_id }} - {{ this.story_title }}">
+                <div class="column col-6">
+                    <div class="form-group">
+                        <label for="goal-story">Goal Story</label>
+                        <input type="text" #story_details class="form-control col-12" id="goal-title" value="{{ this.story_id }} - {{ this.story_title }}" disabled>
+                    </div>
+                </div>
+                <div class="column col-6">
+                    <div class="form-group col-5">
+                        <label for="goal-weightage">Goal Weightage</label>
+                        <input type="number" #weightage min="1" max="100" class="form-control col-12" id="goal-weightage" value="{{ this.goal_weightage }}">
+                    </div>
                 </div>
             </div>
-            <div class="row">
+            <!--<div class="row">
                     <div class="form-group col-3">
                         <label for="goal-weightage">Goal Weightage</label>
                         <input type="number" #weightage min="1" max="100" class="form-control col-8" id="goal-weightage" value="{{ this.goal_weightage }}">
@@ -35,11 +43,14 @@
                     <div class="form-group col-3">
                         <label for="goal-progress">Goal Progress</label>
                         <input type="number" #progress min="1" max="100" class="form-control col-8" id="goal-progress" value="{{ this.goal_progress }}">
+                        <label for="goal-progress">Goal Progress</label>
+                        <progress-bar id="progress" [progress]="progress">
+                        </progress-bar>
                     </div>
-            </div>
+            </div>-->
             <div class="row">
                 <div class="column col-2">
-                    <button class="btn btn-primary btn-lg" (click)="addToGoals(g_id.value, g_title.value, desc.value, story_details.value, weightage.value, progress.value)">Add</button>
+                    <button class="btn btn-primary btn-lg" (click)="addToGoals(g_id.value, g_title.value, desc.value, story_details.value, weightage.value, progress.value)">Save</button>
                 </div>
                 <div class="column col-2">
                     <button class="btn btn-primary btn-lg" (click)="goBack(this.goalArray)">Back</button>

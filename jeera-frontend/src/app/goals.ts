@@ -1,5 +1,6 @@
 export class Goals{
-    id: number;
+    g_id: number;
+    s_id: number;
     title: string;
     desc: string;
     story: string;
