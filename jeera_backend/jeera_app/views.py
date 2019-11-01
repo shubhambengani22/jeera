@@ -171,8 +171,7 @@ def update_goal(request):
 def get_goals(request):
     goals_list = []
     for g in Goal.objects.all():
-        #print(g)
-        goals_list.append({'g_id':g.goal_id,'g_name':g.goal_name,'g_period':g.goal_period,'g_story':g.goal_story,'g_weightage':g.goal_weightage, 'goal_desc':g.goal_desc})
+        goals_list.append({'g_id':g.goal_id,'g_name':g.goal_name,'g_period':g.goal_period,'g_story':g.goal_story.story_id,'g_weightage':g.goal_weightage, 'goal_desc':g.goal_desc})
     return JsonResponse(goals_list,safe=False)
 
 """
