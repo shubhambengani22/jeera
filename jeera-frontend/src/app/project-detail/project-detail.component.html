@@ -39,7 +39,7 @@
             <div class="column col-12">
                 <div *ngFor="let story of this.stories">
                     <div class="card" *ngIf="story.project_id==p_id.value">
-                        <div class="card-header">
+                        <div class="card-header" (click)="goToStory(story.id, story.title, story.desc, story.type, story.level, story.project_id)">
                             {{ story.title }} 
                         </div>
                         <div class="card-body">

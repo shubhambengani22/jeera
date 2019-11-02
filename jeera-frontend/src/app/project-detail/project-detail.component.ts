@@ -52,14 +52,13 @@ export class ProjectDetailComponent implements OnInit {
     })
   }
 
-  goToStory(story_id, story_title, story_desc, story_type, story_level, project_id, project_title){
+  goToStory(story_id, story_title, story_desc, story_type, story_level, project_id){
     this.storage.set('story_id', story_id);
     this.storage.set('story_title', story_title);
     this.storage.set('story_desc', story_desc);
     this.storage.set('story_type', story_type);
     this.storage.set('story_level', story_level);
     this.storage.set('project_id', project_id);
-    this.storage.set('project_title', project_title);
     //console.log(story_id);
     this.router.navigate(['/story']);
   }

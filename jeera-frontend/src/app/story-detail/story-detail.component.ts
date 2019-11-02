@@ -146,4 +146,8 @@ export class StoryDetailComponent implements OnInit {
     this.router.navigate(["/all_stories"])
   }
 
+  markCompleted($e){
+    console.log($e)
+  }
+
 }
