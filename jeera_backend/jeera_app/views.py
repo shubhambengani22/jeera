@@ -56,13 +56,13 @@ def create_project(request):
 def update_project(request):
     try:
         if request.method == 'POST':
-            p_id = request.POST['id']
-            p_name = request.POST['name']
-            p_git = request.POST['git']
-            project = Project.objects.filter(project_id = id)
+            p_id = json.loads(request.body)['id']
+            p_name = json.loads(request.body)['name']
+            p_git = json.loads(request.body)['git']
+            project = Project.objects.filter(project_id = p_id)
             project.update(project_name = p_name,project_git=p_git)
-            project.save()
-            return json_success('successfully updated story')
+            #project.save()
+            return json_success('successfully updated project')
         else:
             return json_error('Invalid Request')
     except Exception as e:
@@ -106,18 +106,20 @@ def create_story(request):
 def update_story(request):
     try:
         if request.method == 'POST':
-            s_id = request.POST['id']
-            s_name = request.POST['name']
-            s_type = request.POST['type']
-            s_level = request.POST['level']
-            s_description = request.POST['description']
-            s_project = Project.objects.filter(project_id=p_id)[0]
-            s_weightage = request.POST['weightage']
+            s_id = json.loads(request.body)['id']
+            s_name = json.loads(request.body)['title']
+            s_type = json.loads(request.body)['type']
+            s_level = json.loads(request.body)['level']
+            s_description = json.loads(request.body)['desc']
+            s_project_id = json.loads(request.body)['project_id']
+            s_project = Project.objects.filter(project_id=s_project_id)[0]
+            #s_weightage = request.POST['weightage']
+            s_weightage = 1
             s_comment = ''
             s_action=''
             story = Story.objects.filter(story_id=s_id)
             story.update(story_name=s_name,story_type=s_type,story_level=s_level,story_description=s_description,story_project=s_project,story_weightage=s_weightage,story_comment=s_comment,story_action=s_action)
-            story.save()
+            #story.save()
             return json_success('story successfully updated')
         else:
             return json_error('Invalid Request')
@@ -154,14 +156,17 @@ def create_goal(request):
 def update_goal(request):
     try:
         if request.method == 'POST':
-            g_id = request.POST['id']
-            g_name = request.POST['name']
-            g_period = request.POST['period']
-            g_story = Story.objects.filter(story_id=g_id)[0]
-            g_weightage = request.POST['weightage']
+            g_id = json.loads(request.body)['g_id']
+            g_name = json.loads(request.body)['title']
+            goal_desc = json.loads(request.body)['desc']
+            #g_period = json.loads(request.body)['period']
+            g_period = 0
+            s_id = json.loads(request.body)['s_id']
+            g_story = Story.objects.filter(story_id=s_id)[0]
+            g_weightage = json.loads(request.body)['weightage']
             goal = Goal.objects.filter(goal_id=g_id)
-            goal.update(goal_name=g_name,goal_period=g_period,goal_story=g_story,goal_weightage=g_weightage)
-            goal.save()
+            goal.update(goal_id=g_id, goal_name=g_name,goal_period=g_period,goal_story=g_story,goal_weightage=g_weightage,goal_desc=goal_desc)
+            #goal.save()
             return json_success('successfully updated goal')
         else:
             return json_error('Invalid Request')

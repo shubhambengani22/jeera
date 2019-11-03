@@ -20,6 +20,8 @@ export class ProjectDetailComponent implements OnInit {
   project_git: string;
   stories: Story[];
   loadStory: boolean = false;
+  projects: any = [];
+  projectExists: boolean = false;
 
   constructor(private router: Router, private snackBar: MatSnackBar, private storage: SessionStorageService, @Inject(DOCUMENT) document, public jeeraservice: JeeraDataService) { }
 
@@ -32,6 +34,7 @@ export class ProjectDetailComponent implements OnInit {
       this.loadStory = true;
       console.log(this.stories)
     }
+    this.projects = this.jeeraservice.getProjects();
   }
 
   openSnackBar(message: string) {
@@ -46,10 +49,32 @@ export class ProjectDetailComponent implements OnInit {
       name: title,
       git: git
     }
-    this.jeeraservice.createProject(project).subscribe((res)=>{
-      console.log(res)
-      this.openSnackBar(res.status)
-    })
+    if(this.projects){
+      for(let i=0; i<this.projects.length; i++){
+        var p = this.projects[i];
+        if(p.id == id){
+          this.projectExists = true;
+          break;
+        }
+      }
+    }
+    if(this.projectExists){
+      if(confirm("Are you sure about updating the project?")){
+        this.jeeraservice.updateProject(project).subscribe((res)=>{
+          console.log(res)
+          this.openSnackBar(res.status);
+        },
+        (error)=>{
+          console.log(error)
+        })
+      }
+    }
+    else{
+      this.jeeraservice.createProject(project).subscribe((res)=>{
+        console.log(res)
+        this.openSnackBar(res.status)
+      })
+    }
   }
 
   goToStory(story_id, story_title, story_desc, story_type, story_level, project_id){

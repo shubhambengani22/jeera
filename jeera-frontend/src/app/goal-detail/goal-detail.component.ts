@@ -22,9 +22,10 @@ export class GoalDetailComponent implements OnInit {
   story_id: number;
   story_title: string;
   stories = all_stories;
-  goalArray: Goals[] = [];
+  goalArray: any = [];
   goal: Goals;
-  progress: number
+  progress: number;
+  goalExists: boolean = false;
 
   constructor(private snackBar: MatSnackBar, private router: Router, private storage: SessionStorageService, public jeeradataservice: JeeraDataService) { }
 
@@ -41,7 +42,10 @@ export class GoalDetailComponent implements OnInit {
       this.goalArray = this.storage.get("goalArray");
     }
     this.progress = 0;
-    //console.log(this.goalArray)
+    this.jeeradataservice.getGoals().subscribe((goals)=>{
+      console.log(goals)
+      this.goalArray = goals;
+    })    
   }
 
   addToGoals(goal_id, goal_title, goal_desc, goal_story, goal_weightage, goal_progress){
@@ -54,16 +58,36 @@ export class GoalDetailComponent implements OnInit {
       weightage: goal_weightage,
       progress: goal_progress
     }
-    // console.log(this.goalArray)
-    // this.goalArray.push(this.goal);
-    // console.log(this.goalArray)
-    this.jeeradataservice.createGoal(this.goal).subscribe((res)=>{
+
+    if(this.goalArray){
+      for(let i=0; i<this.goalArray.length; i++){
+        var g = this.goalArray[i];
+        if(g.g_id == goal_id){
+          this.goalExists = true;
+          break;
+        }
+      }
+    }
+    if(this.goalExists){
+      if(confirm("Are you sure about updating the goal?")){
+        this.jeeradataservice.updateGoal(this.goal).subscribe((res)=>{
+          console.log(res)
+          this.openSnackBar(res.status);
+        },
+        (error)=>{
+          console.log(error);
+        })
+      }
+    }
+    else{
+      this.jeeradataservice.createGoal(this.goal).subscribe((res)=>{
       console.log(res)
       this.openSnackBar(res.status)
-    },
-    (error)=>{
-      console.log(error)
-    })
+      },
+      (error)=>{
+        console.log(error)
+      })
+    }
   }
 
   openSnackBar(message: string) {

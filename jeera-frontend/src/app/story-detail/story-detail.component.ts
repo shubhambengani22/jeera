@@ -39,6 +39,8 @@ export class StoryDetailComponent implements OnInit {
   project_id: number
   project_title: string
   progress: number = 0
+  s: any = [];
+  storyExists: boolean = false;
 
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
@@ -67,6 +69,8 @@ export class StoryDetailComponent implements OnInit {
     (error)=>{
       console.log(error);
     })
+
+    this.s = this.jeeradataservice.getStories();
 
   }
 
@@ -119,15 +123,32 @@ export class StoryDetailComponent implements OnInit {
       level_icon: s_level.toLowerCase(),
       project_id: project_id
     }
-    //console.log(this.storyArray)
-    this.storyArray.push(this.story);
-    //console.log(this.story)
-    this.dataService.createStory(this.story).subscribe(res=>{
-      console.log(res);
-      this.openSnackBar(res.status)
-    })
-    //alert("Goal added : "+this.goal)
-    //console.log(temp);
+    if(this.s){
+      for(let i=0; i<this.s.length; i++){
+        var temp_story = this.s[i];
+        if(temp_story.id == s_id){
+          this.storyExists = true;
+          break;
+        }
+      }
+    }
+    if(this.storyExists){
+      if(confirm("Are you sure about updating the story?")){
+        this.jeeradataservice.updateStory(this.story).subscribe((res)=>{
+          console.log(res)
+          this.openSnackBar(res.status);
+        },
+        (error)=>{
+          console.log(error)
+        })
+      }
+    }
+    else{
+      this.dataService.createStory(this.story).subscribe(res=>{
+        console.log(res);
+        this.openSnackBar(res.status)
+      })
+    }
     
   }
 
