@@ -70,7 +70,7 @@
         <div *ngIf="!loadGoal"><h4>No Goals</h4></div>
         <div class="row" *ngIf="loadGoal">
             <div class="column col-12">
-                <div *ngFor="let goal of this.goalArray">
+                <div *ngFor="let goal of this.goalArray | paginate: { itemsPerPage: 3, currentPage: p }">
                     <div class="card" *ngIf="goal.g_story==this.story_id">
                         <div class="card-header" (click)="goToGoal(goal.g_id, goal.g_name, goal.goal_desc, goal.g_story, goal.g_weightage, goal.g_progress)">{{ goal.g_name }}</div>
                         <div class="card-body">
@@ -83,7 +83,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div><br>
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
             </div>
         </div>
     </div>

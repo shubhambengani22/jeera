@@ -37,7 +37,7 @@
         <div *ngIf="!loadStory"><h3>Loading Stories</h3></div>
         <div class="row">
             <div class="column col-12">
-                <div *ngFor="let story of this.stories">
+                <div *ngFor="let story of this.stories | paginate: { itemsPerPage: 4, currentPage: p }">
                     <div class="card" *ngIf="story.project_id==p_id.value">
                         <div class="card-header" (click)="goToStory(story.id, story.title, story.desc, story.type, story.level, story.project_id)">
                             {{ story.title }} 
@@ -49,7 +49,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div><br>
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
             </div>
         </div>
     </div>

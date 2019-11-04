@@ -8,7 +8,7 @@
     <h2>Stories</h2>
     <div  class="story-list">
       <div *ngIf="stories.length">
-          <div class="card" *ngFor="let story of this.stories">
+          <div class="card" *ngFor="let story of this.stories | paginate: { itemsPerPage: 5, currentPage: p }">
               <div class="card-header">
                 {{ story.title }}
                 <img src="{{ story.level_icon }}" class="icon">
@@ -16,7 +16,8 @@
               <div class="card-body" [ngStyle]="borderLeft(story.type)">
                   <p class="card-text">{{ story.desc }}</p>
               </div>
-          </div>
+          </div><br>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
       </div>
     </div>
   </div>

@@ -9,7 +9,7 @@
         <input class="form-control col-2 search" placeholder="Search" (keyup.enter)="searchStory(story.value)" #story><br>
         <div  class="story-list">
         <div *ngIf="this.stories.length">
-            <div class="card" *ngFor="let story of stories">
+            <div class="card" *ngFor="let story of stories | paginate: { itemsPerPage: 3, currentPage: p }">
                 <div class="card-header">
                     {{ story.title }}
                     <img src="{{ story.level_icon }}" class="icon">
@@ -17,7 +17,8 @@
                 <div class="card-body" [ngStyle]="borderLeft(story.type)" (click)="goToStory(story.id, story.title, story.desc, story.type, story.level, story.project_id)">
                     <p class="card-text">{{ story.desc }}</p>
                 </div>
-            </div>
+            </div><br>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
     </div>
 </div>
