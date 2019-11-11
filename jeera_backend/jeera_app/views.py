@@ -86,10 +86,11 @@ def create_story(request):
             s_project_id = json.loads(request.body)['project_id']
             s_project = Project.objects.filter(project_id=s_project_id)[0]
             #s_weightage = request.POST['weightage']
-            s_weightage = 1
+            s_weightage = json.loads(request.body)['weightage']
+            s_progress = json.loads(request.body)['progress']
             s_comment = ''
             s_action=''
-            story = Story(story_name=s_name,story_type=s_type,story_level=s_level,story_description=s_description,story_project=s_project,story_weightage=s_weightage,story_comment=s_comment,story_action=s_action)
+            story = Story(story_name=s_name,story_type=s_type,story_level=s_level,story_description=s_description,story_project=s_project,story_weightage=s_weightage,story_comment=s_comment,story_action=s_action,story_progress=s_progress)
             story.save()
             return json_success('story successfully added')
         else:
@@ -114,11 +115,12 @@ def update_story(request):
             s_project_id = json.loads(request.body)['project_id']
             s_project = Project.objects.filter(project_id=s_project_id)[0]
             #s_weightage = request.POST['weightage']
-            s_weightage = 1
+            s_weightage = json.loads(request.body)['weightage']
+            s_progress = json.loads(request.body)['progress']
             s_comment = ''
             s_action=''
             story = Story.objects.filter(story_id=s_id)
-            story.update(story_name=s_name,story_type=s_type,story_level=s_level,story_description=s_description,story_project=s_project,story_weightage=s_weightage,story_comment=s_comment,story_action=s_action)
+            story.update(story_name=s_name,story_type=s_type,story_level=s_level,story_description=s_description,story_project=s_project,story_weightage=s_weightage,story_comment=s_comment,story_action=s_action,story_progress=s_progress)
             #story.save()
             return json_success('story successfully updated')
         else:
@@ -129,7 +131,7 @@ def update_story(request):
 def get_stories(request):
     story_list = []
     for s in Story.objects.all():
-        story_list.append({'s_id':s.story_id,'s_name':s.story_name,'s_type':s.story_type,'s_level':s.story_level,'s_description':s.story_description,'s_project':s.story_project_id,'s_weightage':s.story_weightage,'s_comment':s.story_comment,'s_action':s.story_action})
+        story_list.append({'s_id':s.story_id,'s_name':s.story_name,'s_type':s.story_type,'s_level':s.story_level,'s_description':s.story_description,'s_project':s.story_project_id,'s_weightage':s.story_weightage,'s_comment':s.story_comment,'s_action':s.story_action,'s_progress':s.story_progress})
     return JsonResponse(story_list,safe=False)
 
 @csrf_exempt
@@ -142,9 +144,10 @@ def create_goal(request):
             #g_period = json.loads(request.body)['period']
             g_period = 0
             s_id = json.loads(request.body)['s_id']
+            goal_completed = json.loads(request.body)['goal_completed']
             g_story = Story.objects.filter(story_id=s_id)[0]
             g_weightage = json.loads(request.body)['weightage']
-            goal = Goal(goal_id=g_id, goal_name=g_name,goal_period=g_period,goal_story=g_story,goal_weightage=g_weightage,goal_desc=goal_desc)
+            goal = Goal(goal_id=g_id, goal_name=g_name,goal_period=g_period,goal_story=g_story,goal_weightage=g_weightage,goal_desc=goal_desc, goal_completed=goal_completed)
             goal.save()
             return json_success('successfully added goal')
         else:
@@ -164,8 +167,9 @@ def update_goal(request):
             s_id = json.loads(request.body)['s_id']
             g_story = Story.objects.filter(story_id=s_id)[0]
             g_weightage = json.loads(request.body)['weightage']
+            goal_completed = json.loads(request.body)['goal_completed']
             goal = Goal.objects.filter(goal_id=g_id)
-            goal.update(goal_id=g_id, goal_name=g_name,goal_period=g_period,goal_story=g_story,goal_weightage=g_weightage,goal_desc=goal_desc)
+            goal.update(goal_id=g_id, goal_name=g_name,goal_period=g_period,goal_story=g_story,goal_weightage=g_weightage,goal_desc=goal_desc, goal_completed=goal_completed)
             #goal.save()
             return json_success('successfully updated goal')
         else:
@@ -176,7 +180,7 @@ def update_goal(request):
 def get_goals(request):
     goals_list = []
     for g in Goal.objects.all():
-        goals_list.append({'g_id':g.goal_id,'g_name':g.goal_name,'g_period':g.goal_period,'g_story':g.goal_story.story_id,'g_weightage':g.goal_weightage, 'goal_desc':g.goal_desc})
+        goals_list.append({'g_id':g.goal_id,'g_name':g.goal_name,'g_period':g.goal_period,'g_story':g.goal_story.story_id,'g_weightage':g.goal_weightage, 'goal_desc':g.goal_desc, 'goal_completed': g.goal_completed})
     return JsonResponse(goals_list,safe=False)
 
 """

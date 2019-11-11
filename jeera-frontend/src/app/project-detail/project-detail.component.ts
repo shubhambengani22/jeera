@@ -7,6 +7,7 @@ import { JeeraDataService } from '../jeera-data.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Story } from '../stories';
+import { Goals } from '../goals';
 
 @Component({
   selector: 'app-project-detail',
@@ -22,6 +23,12 @@ export class ProjectDetailComponent implements OnInit {
   loadStory: boolean = false;
   projects: any = [];
   projectExists: boolean = false;
+  progress: number = 0;
+  all_stories = [];
+  total_weightage: number = 0;
+  goals = [];
+  project_stories = []
+  project_goals = []
 
   constructor(private router: Router, private snackBar: MatSnackBar, private storage: SessionStorageService, @Inject(DOCUMENT) document, public jeeraservice: JeeraDataService) { }
 
@@ -32,7 +39,6 @@ export class ProjectDetailComponent implements OnInit {
     this.stories = this.jeeraservice.getStories();
     if(this.stories){
       this.loadStory = true;
-      console.log(this.stories)
     }
     this.projects = this.jeeraservice.getProjects();
   }

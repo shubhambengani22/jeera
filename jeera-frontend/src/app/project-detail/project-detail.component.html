@@ -21,6 +21,13 @@
                     <input type="text" #p_git class="form-control col-8" id="project-git" value="{{ this.project_git }}">
                 </div>
             </div>
+            <div class="row">
+                <div class="column">
+                    <label for="story-progress">Project Progress</label>
+                    <progress-bar id="progress" [progress]="progress">
+                    </progress-bar>
+                </div>
+            </div>
             <div class="row btns">
                 <div class="column col-2">
                     <button class="btn btn-primary btn-lg" (click)="addToProjects(p_id.value, p_title.value, p_git.value)">Add</button>

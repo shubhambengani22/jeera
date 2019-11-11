@@ -17,6 +17,7 @@ class Story(models.Model):
     story_weightage = models.IntegerField(default=7)
     story_comment = models.TextField(null=True)
     story_action = models.TextField(null=True)
+    story_progress = models.IntegerField(default=0)
 
 class Goal(models.Model):
     goal_id = models.IntegerField(primary_key=True)
@@ -25,6 +26,7 @@ class Goal(models.Model):
     goal_story = models.ForeignKey(Story,default='',on_delete=models.CASCADE)
     goal_weightage = models.IntegerField(default=7)
     goal_desc = models.CharField(max_length=255, default="")
+    goal_completed = models.IntegerField(default=0)
 
 class User(models.Model):
     user_name = models.CharField(unique=True,max_length=255)

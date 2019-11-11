@@ -26,6 +26,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ProgressBarModule} from "angular-progress-bar"
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -59,7 +60,8 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
     BrowserAnimationsModule,
     ProgressBarModule,
     MatSnackBarModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

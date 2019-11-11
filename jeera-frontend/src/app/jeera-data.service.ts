@@ -35,9 +35,7 @@ export class JeeraDataService {
     var projects: Project[] = [];
     this.http.get<any>(this.host+"/get_projects/",{'responseType':'json'}).subscribe(data => {
       data.forEach(element => {
-        console.log(element);
         var project =  new Project(element.p_id,element.p_name,element.p_git);
-        console.log(project);
         projects.push(project);
       });
     });
@@ -58,7 +56,7 @@ export class JeeraDataService {
     var stories: Story[] = [];
     this.http.get<any>(this.host+"/get_stories/",{'responseType':'json'}).subscribe(data => {
       data.forEach(element => {
-        var story =  new Story(element.s_id,element.s_name,element.s_description,element.s_type, element.s_level,all_icons[element.s_level.toLowerCase()], element.s_project);
+        var story =  new Story(element.s_id,element.s_name,element.s_description,element.s_type, element.s_level,all_icons[element.s_level.toLowerCase()], element.s_project, element.s_weightage, 0);
         stories.push(story);
       });
     });

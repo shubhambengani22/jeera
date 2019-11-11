@@ -26,6 +26,8 @@ export class GoalDetailComponent implements OnInit {
   goal: Goals;
   progress: number;
   goalExists: boolean = false;
+  goal_completed: any;
+  completed: number = 0;
 
   constructor(private snackBar: MatSnackBar, private router: Router, private storage: SessionStorageService, public jeeradataservice: JeeraDataService) { }
 
@@ -36,11 +38,14 @@ export class GoalDetailComponent implements OnInit {
     this.goal_story = this.storage.get("goal_story");
     this.goal_weightage = this.storage.get("goal_weightage");
     this.goal_progress = this.storage.get("goal_progress");
+    this.goal_completed = this.storage.get("goal_completed");
+    this.goal_completed = Boolean(this.goal_completed)
     this.story_id = this.storage.get("story_id");
     this.story_title = this.storage.get("story_title");
     if(this.storage.get("goalArray") != null){
       this.goalArray = this.storage.get("goalArray");
     }
+    console.log(this.goalArray)
     this.progress = 0;
     this.jeeradataservice.getGoals().subscribe((goals)=>{
       console.log(goals)
@@ -48,7 +53,8 @@ export class GoalDetailComponent implements OnInit {
     })    
   }
 
-  addToGoals(goal_id, goal_title, goal_desc, goal_story, goal_weightage, goal_progress){
+  addToGoals(goal_id, goal_title, goal_desc, goal_story, goal_weightage){
+    console.log(this.completed)
     this.goal = {
       g_id: goal_id,
       s_id: this.story_id,
@@ -56,7 +62,7 @@ export class GoalDetailComponent implements OnInit {
       desc: goal_desc,
       story: goal_story,
       weightage: goal_weightage,
-      progress: goal_progress
+      goal_completed: this.completed
     }
 
     if(this.goalArray){
@@ -99,6 +105,12 @@ export class GoalDetailComponent implements OnInit {
   goBack(goalsArray){
     this.storage.set("goalArray", goalsArray);
     this.router.navigate(["/story"])
+  }
+
+  toggle(event){
+    if(event.checked == true){
+      this.completed = 1
+    }
   }
 
 }

@@ -19,7 +19,6 @@ export class StoriesComponent implements OnInit {
   ngOnInit(): void {
     this.stories = this.jeera.getStories();
     this.storyArray = this.storage.get("storyArray")
-    console.log(this.stories)
   }
 
   colors = {
@@ -45,13 +44,14 @@ export class StoriesComponent implements OnInit {
     console.log(story)
   }
 
-  goToStory(story_id, story_title, story_desc, story_type, story_level, project_id){
+  goToStory(story_id, story_title, story_desc, story_type, story_level, project_id, weightage){
     this.storage.set('story_id', story_id);
     this.storage.set('story_title', story_title);
     this.storage.set('story_desc', story_desc);
     this.storage.set('story_type', story_type);
     this.storage.set('story_level', story_level);
     this.storage.set('project_id', project_id);
+    this.storage.set('story_weightage', weightage);
     //console.log(story_id);
     this.router.navigate(['/story']);
   }

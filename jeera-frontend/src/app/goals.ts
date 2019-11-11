@@ -5,5 +5,5 @@ export class Goals{
     desc: string;
     story: string;
     weightage: number;
-    progress: number;
+    goal_completed: number;
 }
