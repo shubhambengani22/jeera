@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="column col-2">
+        <app-navbar></app-navbar>
+    </div>
+    <div class="column column3 col-6">
+        <h2>Goal Details</h2><br>
+        <form>
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="goal-id">Goal ID</label>
+                    <input type="text" #g_id class="form-control col-3" id="goal-id" value="{{ this.goal_id }}">
+                </div>
+                <div class="form-group col-6">
+                    <label for="goal-title">Goal Title</label>
+                    <input type="text" #g_title class="form-control col-12" id="goal-title" value="{{ this.goal_title }}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-12">
+                    <label for="goal-desc">Goal Description</label>
+                    <textarea class="form-control col-12" #desc id="goal-desc" style="height: 100px" value="{{ this.goal_desc }}"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column col-6">
+                    <div class="form-group">
+                        <label for="goal-story">Goal Story</label>
+                        <input type="text" #story_details class="form-control col-12" id="goal-title" value="{{ this.story_id }} - {{ this.story_title }}" disabled>
+                    </div>
+                </div>
+                <div class="column col-6">
+                    <div class="form-group col-5">
+                        <label for="goal-weightage">Goal Weightage</label>
+                        <input type="number" #weightage min="1" max="100" class="form-control col-12" id="goal-weightage" value="{{ this.goal_weightage }}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="container">
+                    <mat-checkbox [checked]="this.goal_completed" (change)="toggle($event)">Mark as Completed</mat-checkbox>
+                </div>
+            </div><br>
+            <!--<div class="row">
+                    <div class="form-group col-3">
+                        <label for="goal-weightage">Goal Weightage</label>
+                        <input type="number" #weightage min="1" max="100" class="form-control col-8" id="goal-weightage" value="{{ this.goal_weightage }}">
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="goal-progress">Goal Progress</label>
+                        <input type="number" #progress min="1" max="100" class="form-control col-8" id="goal-progress" value="{{ this.goal_progress }}">
+                        <label for="goal-progress">Goal Progress</label>
+                        <progress-bar id="progress" [progress]="progress">
+                        </progress-bar>
+                    </div>
+            </div>-->
+            <div class="row">
+                <div class="column col-2">
+                    <button class="btn btn-primary btn-lg" (click)="addToGoals(g_id.value, g_title.value, desc.value, story_details.value, weightage.value)">Save</button>
+                </div>
+                <div class="column col-2">
+                    <button class="btn btn-primary btn-lg" (click)="goBack(this.goalArray)">Back</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

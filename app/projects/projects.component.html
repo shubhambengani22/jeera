@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="column column0 col-2">
+        <app-navbar>
+    
+        </app-navbar>
+    </div>
+    <div class="column column1 col-10">
+        <h2 class="col-8">All Projects</h2>
+        <button class="btn btn-info add-project" (click)="addProject('', '', '')">Add Project</button>
+        <input class="form-control col-2 search" placeholder="Search" (keyup.enter)="searchProject(project.value)"><br>
+        <div  class="project-list">
+        <div *ngIf="projects.length">
+            <div class="card" *ngFor="let project of projects | paginate: { itemsPerPage: 5, currentPage: p }">
+                <div class="card-header">
+                    {{ project.name }}
+                </div>       
+                <div class="card-body" (click)="goToProject(project.id, project.name, project.git)">
+                    <p class="card-text">Github Repository : {{ project.git }}</p>
+                </div>
+            </div><br>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+    </div>
+</div>

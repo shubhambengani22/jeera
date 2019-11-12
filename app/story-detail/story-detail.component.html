@@ -1,0 +1,88 @@
+<div class="row">
+    <div class="column col-2">
+        <app-navbar></app-navbar>
+    </div>
+    <div class="column column3 col-6">
+        <h2>Story Details</h2><br>
+        <form>
+            <div class="row">
+                <div class="form-group col-4">
+                    <label for="story-id">Story ID</label>
+                    <input type="text" #s_id class="form-control col-6" id="story-id" value="{{ this.story_id }}">
+                </div>
+                <div class="form-group col-6">
+                    <label for="project-id">Project</label>
+                    <input type="text" #project class="form-control col-6" id="project-id" value="{{ this.project_id }}" disabled>
+                </div>
+                <div class="form-group col-6">
+                    <label for="story-title">Story Title</label>
+                    <input type="text" #s_title class="form-control col-12" id="story-title" value="{{ this.story_title }}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-12">
+                    <label for="story-desc">Story Description</label>
+                    <textarea class="form-control col-12" id="story-desc" #s_desc style="height: 80px" value="{{ this.story_desc }}"></textarea>
+                </div>
+            </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="story-type">Story Type</label>
+                        <select name="type" #s_type class="form-control" id="story-type">
+                            <option>Enhancement</option>
+                            <option>Bug</option>
+                            <option>Development</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="story-level">Story Level</label>
+                        <select name="level" #s_level class="form-control" id="story-level">
+                            <option>Demon</option>
+                            <option>Dragon</option>
+                            <option>God</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-3">
+                        <label for="story-weightage">Story Weightage</label>
+                        <input type="number" #weightage min="1" max="100" class="form-control col-8" id="story-weightage" value="{{ this.story_weightage }}">
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="story-progress">Story Progress</label>
+                        <progress-bar id="progress" [progress]="progress">
+                        </progress-bar>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column col-2">
+                        <button class="btn btn-primary btn-lg" (click)="addToStory(s_id.value, s_title.value, s_desc.value, s_type.value, s_level.value, this.project_id, weightage.value, true)">Save</button>
+                    </div>
+                    <div class="column col-2">
+                        <button class="btn btn-primary btn-lg" (click)="goBack(this.storyArray)">Back</button>
+                    </div>
+                </div>
+        </form>
+    </div>
+    <div class="column column4 col-4">
+        <h2>All Goals</h2>
+        <button class="btn btn-info add-goal" (click)="addNewGoal(s_id.value, s_title.value)">Add Goal</button><br>
+        <div *ngIf="!loadGoal"><h4>No Goals</h4></div>
+        <div class="row" *ngIf="loadGoal">
+            <div class="column col-12">
+                <div *ngFor="let goal of this.goalArray | paginate: { itemsPerPage: 3, currentPage: p }">
+                    <div class="card" *ngIf="goal.g_story==this.story_id">
+                        <div class="card-header" (click)="goToGoal(goal.g_id, goal.g_name, goal.goal_desc, goal.g_story, goal.g_weightage, goal.g_progress, goal.goal_completed)">{{ goal.g_name }}</div>
+                        <div class="card-body">
+                            <div class="card-text">
+                                <p>{{ goal.goal_desc }}</p>
+                                Goal Status : {{ goal.goal_completed }}
+                            </div>
+                        </div>
+                    </div>
+                </div><br>
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>
