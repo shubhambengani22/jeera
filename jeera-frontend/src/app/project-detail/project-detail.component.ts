@@ -29,6 +29,7 @@ export class ProjectDetailComponent implements OnInit {
   goals = [];
   project_stories = []
   project_goals = []
+  project_progress: number = 0;
 
   constructor(private router: Router, private snackBar: MatSnackBar, private storage: SessionStorageService, @Inject(DOCUMENT) document, public jeeraservice: JeeraDataService) { }
 
@@ -41,6 +42,17 @@ export class ProjectDetailComponent implements OnInit {
       this.loadStory = true;
     }
     this.projects = this.jeeraservice.getProjects();
+    setTimeout(()=>{
+      for(let i=0; i<this.stories.length; i++){
+        if(this.stories[i].project_id == this.project_id){
+          this.project_progress += this.stories[i].weightage*this.stories[i].progress
+          this.total_weightage += this.stories[i].weightage
+        }
+      }
+      this.progress = (this.project_progress/this.total_weightage)
+      console.log(this.progress)
+    }
+    , 500)
   }
 
   openSnackBar(message: string) {

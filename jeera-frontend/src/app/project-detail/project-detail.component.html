@@ -22,9 +22,9 @@
                 </div>
             </div>
             <div class="row">
-                <div class="column">
-                    <label for="story-progress">Project Progress</label>
-                    <progress-bar id="progress" [progress]="progress">
+                <div class="form-group col-3">
+                    <label for="project-progress">Project Progress</label>
+                    <progress-bar id="project-progress" [progress]="progress">
                     </progress-bar>
                 </div>
             </div>
@@ -53,6 +53,7 @@
                             <div class="card-text">
                                 {{ story.desc }}
                                 <br>Project ID : {{ story.project_id }}
+                                <br>Progress : {{ story.progress }}
                             </div>
                         </div>
                     </div>

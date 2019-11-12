@@ -56,7 +56,7 @@ export class JeeraDataService {
     var stories: Story[] = [];
     this.http.get<any>(this.host+"/get_stories/",{'responseType':'json'}).subscribe(data => {
       data.forEach(element => {
-        var story =  new Story(element.s_id,element.s_name,element.s_description,element.s_type, element.s_level,all_icons[element.s_level.toLowerCase()], element.s_project, element.s_weightage, 0);
+        var story =  new Story(element.s_id,element.s_name,element.s_description,element.s_type, element.s_level,all_icons[element.s_level.toLowerCase()], element.s_project, element.s_weightage, element.s_progress);
         stories.push(story);
       });
     });

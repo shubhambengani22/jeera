@@ -50,6 +50,7 @@ export class StoryDetailComponent implements OnInit {
   options: string[] = ['One', 'Two', 'Three'];
 
   ngOnInit() {
+    this.s = this.jeeradataservice.getStories();
     this.story_id = this.storage.get("story_id");
     this.story_title = this.storage.get("story_title");
     this.story_desc = this.storage.get("story_desc");
@@ -84,9 +85,7 @@ export class StoryDetailComponent implements OnInit {
     (error)=>{
       console.log(error);
     })
-
-    this.s = this.jeeradataservice.getStories();
-
+    setTimeout(()=>this.addToStory(this.story_id, this.story_title, this.story_desc, this.story_type, this.story_level, this.project_id, this.story_weightage, false), 500)
   }
 
   openSnackBar(message: string) {
@@ -126,7 +125,7 @@ export class StoryDetailComponent implements OnInit {
     this.router.navigate(['/goal']);
   }
 
-  addToStory(s_id, s_title, s_desc, s_type, s_level, project_id, weightage){
+  addToStory(s_id, s_title, s_desc, s_type, s_level, project_id, weightage, callAlert){
     this.story = {
       id: s_id,
       title: s_title,
@@ -148,15 +147,17 @@ export class StoryDetailComponent implements OnInit {
       }
     }
     if(this.storyExists){
-      if(confirm("Are you sure about updating the story?")){
-        this.jeeradataservice.updateStory(this.story).subscribe((res)=>{
-          console.log(res)
-          this.openSnackBar(res.status);
-        },
-        (error)=>{
-          console.log(error)
-        })
+      if(callAlert)
+      {
+        confirm("Are you sure about updating the story?")
       }
+      this.jeeradataservice.updateStory(this.story).subscribe((res)=>{
+        console.log(res)
+        this.openSnackBar(res.status);
+      },
+      (error)=>{
+        console.log(error)
+      })
     }
     else{
       this.dataService.createStory(this.story).subscribe(res=>{
