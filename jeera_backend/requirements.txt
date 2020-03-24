@@ -14,7 +14,7 @@ backports.os==0.1.1
 backports.shutil-get-terminal-size==1.0.0
 beautifulsoup4==4.6.3
 bitarray==0.8.3
-bleach==3.0.2
+bleach==3.1.2
 boto==2.49.0
 bson==0.5.8
 certifi==2019.6.16
